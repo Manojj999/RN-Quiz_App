@@ -24,9 +24,43 @@ const styles = StyleSheet.create({
 })
 
 class Quiz extends React.Component {
+    state = {
+        correctCount: "0",
+        totalCount: Temp_Questions.length,
+        activeQuestionIndex: 0,
 
+
+    }
+    answer = (correct) => {
+        this.setState(state => {
+            const nextState = {
+
+            };
+            if (correct) {
+                nextState.correctCount = state.correctCount + 1;
+            }
+            return nextState;
+        }, () => {
+            this.nextQuestion();
+        })
+    }
+
+    nextQuestion = () => {
+
+        this.setState(state => {
+            let nextIndex = state.activeQuestionIndex + 1;
+            
+            if(nextIndex >= state.totalCount){
+                nextIndex = 0
+            }
+            return{
+                activeQuestionIndex:nextIndex,
+            }
+        })
+    }
     render() {
-        const question = Temp_Questions[0];
+
+        const question = Temp_Questions[this.state.activeQuestionIndex];
         return (
 
             <View style={styles.container}>
@@ -37,17 +71,17 @@ class Quiz extends React.Component {
                         <Text style={styles.text}>{question.question}</Text>
 
                         <ButtonContainer>
-                            {question.answers.map((answer) => (
+                            {question.answers.map(answer => (
                                 <Button
                                     key={answer.id}
                                     text={answer.text}
-                                    onPress={() => alert('hello')}
+                                    onPress={() => this.answer(answer.correct)}
                                 />
                             ))}
                         </ButtonContainer>
                     </View>
 
-                    <Text style={styles.text}>0/3</Text>
+                    <Text style={styles.text}>{`${this.state.correctCount} / ${this.state.totalCount}`}</Text>
 
                 </SafeAreaView>
 
