@@ -2,6 +2,7 @@ import React from 'react';
 import { View, StyleSheet, StatusBar, Text, SafeAreaView } from 'react-native';
 import Temp_Questions from '../data/computers';
 import { Button, ButtonContainer } from '../Components/Button';
+import { Alert } from '../Components/Alert';
 
 const styles = StyleSheet.create({
     container: {
@@ -25,23 +26,30 @@ const styles = StyleSheet.create({
 
 class Quiz extends React.Component {
     state = {
-        correctCount: "0",
+        correctCount: 0,
         totalCount: Temp_Questions.length,
         activeQuestionIndex: 0,
-
+        answered: false,
+        answerCorrect: false
 
     }
     answer = (correct) => {
         this.setState(state => {
             const nextState = {
-
+                answered: true
             };
             if (correct) {
                 nextState.correctCount = state.correctCount + 1;
+                nextState.answerCorrect = true
+            }
+            else {
+                nextState.answerCorrect = false
             }
             return nextState;
         }, () => {
-            this.nextQuestion();
+
+            setTimeout(() => this.nextQuestion(), 750)
+           
         })
     }
 
@@ -49,12 +57,13 @@ class Quiz extends React.Component {
 
         this.setState(state => {
             let nextIndex = state.activeQuestionIndex + 1;
-            
-            if(nextIndex >= state.totalCount){
+
+            if (nextIndex >= state.totalCount) {
                 nextIndex = 0
             }
-            return{
-                activeQuestionIndex:nextIndex,
+            return {
+                activeQuestionIndex: nextIndex,
+                answered:false
             }
         })
     }
@@ -84,7 +93,7 @@ class Quiz extends React.Component {
                     <Text style={styles.text}>{`${this.state.correctCount} / ${this.state.totalCount}`}</Text>
 
                 </SafeAreaView>
-
+                <Alert correct={this.state.answerCorrect} visible={this.state.answered} />
             </View>
         );
     }
