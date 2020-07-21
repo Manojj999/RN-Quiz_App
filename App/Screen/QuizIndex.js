@@ -8,7 +8,7 @@ import { RowItems } from '../Components/RowItems';
 
 export default ({ navigation }) => (
     <ScrollView>
-        <StatusBar barStyle="light-content" />
+        <StatusBar barStyle="dark-content" />
         
          {/* navigation.navigate('Quiz') => which first screen you want to navigate */}
         
