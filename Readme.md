@@ -4,10 +4,10 @@ React Native Quiz App.
 
 |     Home Screen     |   Space Questions   |
 | :-----------------: | :-----------------: |
-| ![](./assets/1.png) | ![](./assets/4.png) |
+| ![](./assets/1.png) | ![](./assets/2.png) |
 |                     |                     |
 | Westerns Questions  | Computer Questions  |
-| ![](./assets/2.png) | ![](./assets/3.png) |
+| ![](./assets/3.png) | ![](./assets/4.png) |
 
 ### Installation
 
